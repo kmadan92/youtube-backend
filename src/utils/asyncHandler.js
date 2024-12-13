@@ -1,8 +1,10 @@
-const asyncHandler = (func) = async (req,res,next) => {
+/*
+const asyncHandler = async function (req,res,next) {
 
     try{
 
-        await func(req,res,next);
+     const result = await func(req,res,next);
+      return result
 
     }catch(error){
         res.status(err.code || 500).json({
@@ -12,14 +14,19 @@ const asyncHandler = (func) = async (req,res,next) => {
     }
     
 }
+    */
 
-/*-----Alternate way using Promise
-const asyncHandler = (func) = (req,res,next) =>{
+
+const asyncHandler = (func) => { 
+    
+   return (req,res,next) =>{
 
     Promise
-    .resolve(func(req,res,next))
-    .catch(next(err))
+      .resolve(func(req,res,next))
+      .catch((err) => next(err))
+  }
+
 }
----------------------*/
+
 
 export {asyncHandler}

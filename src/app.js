@@ -1,5 +1,7 @@
 import dotenv from 'dotenv'
 import express from 'express'
+import cors from "cors"
+import cookieParser from "cookie-parser"
 
 dotenv.config({path:'./.env'})
 const app = express()
@@ -21,3 +23,11 @@ app.use(express.static("public"))
 
 //allow read-write cookies to client
 app.use(cookieParser())
+
+// import routes
+import routerUser from "./routes/users.routes.js"
+
+//declare routes
+app.use("/api/users",routerUser)
+
+export {app}

@@ -52,6 +52,9 @@ const userSchema = new Schema(
     }
 )
 
+
+// next is a flag for middlewares
+//docs - https://mongoosejs.com/docs/middleware.html
 userSchema.pre("save", async function (next) {
     if(!this.isModified("password")) return next();
 
@@ -59,10 +62,13 @@ userSchema.pre("save", async function (next) {
     next()
 })
 
+// defining custom methods
 userSchema.methods.isPasswordCorrect = async function(password){
     return await bcrypt.compare(password, this.password)
 }
 
+// use jwt.io for token creation
+// access token will not be saved in Db while refresh token will be
 userSchema.methods.generateAccessToken = function(){
     return jwt.sign(
         {
