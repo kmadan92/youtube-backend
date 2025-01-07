@@ -7,7 +7,7 @@ import {app} from "./app.js"
 dotenv.config({path:'./.env'})
 const port = process.env.PORT
 
-connectDB()
+ connectDB()
 .then(()=>{
     app.on("error",(error)=>{
         console.log("Error connecting to app.....")

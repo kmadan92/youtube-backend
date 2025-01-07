@@ -6,14 +6,12 @@ import { CLOUDINARY_CLOUD_NAME } from '../constants.js';
 dotenv.config({path:'./.env'})
 
 //Configuration
-const config = async function(){
-
     cloudinary.config({ 
-        cloud_name: '${CLOUDINARY_CLOUD_NAME}', 
+        cloud_name: `${CLOUDINARY_CLOUD_NAME}`, 
         api_key: process.env.CLOUDINARY_API_KEY, 
         api_secret: process.env.CLOUDINARY_API_SECRET
     })
-}
+
 
 // Upload an image
 const uploadResult = async function(localFilePath){
@@ -29,11 +27,15 @@ const uploadResult = async function(localFilePath){
             }
         )
 
+        fs.unlinkSync(localFilePath) // remove file from local path after cloud upload
+
         return uploadResponse
 
     }catch(error){
 
-            fs.unlinkSync(localFilePath) // remove file from local path if error occurs
+           fs.unlinkSync(localFilePath) // remove file from local path if error occurs
+        
+           //console.log(error)
             return null
 
     }

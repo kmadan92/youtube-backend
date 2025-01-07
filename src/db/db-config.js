@@ -1,30 +1,18 @@
 import dotenv from 'dotenv'
-import { MongoClient, ServerApiVersion } from 'mongodb';
+import mongoose from "mongoose";
 import { DB_NAME } from '../constants.js';
 
 dotenv.config({path:'./.env'})
 const uri = process.env.MONGODB_URI
 
-// Create a MongoClient with a MongoClientOptions object to set the Stable API version
-const client = new MongoClient(uri, {
-    serverApi: {
-      version: ServerApiVersion.v1,
-      strict: true,
-      deprecationErrors: true,
-    }
-  });
-  async function connectDB() {
-    try {
-      // Connect the client to the server	(optional starting in v4.7)
-      await client.connect();
-      // Send a ping to confirm a successful connection
-      await client.db('{$DB_NAME}').command({ ping: 1 });
-      console.log("Pinged your DB. You successfully connected to MongoDB!");
-
-    } finally {
-      // Ensures that the client will close when you finish/error
-      await client.close();
-    }
+const connectDB = async () => {
+  try {
+      const connectionInstance = await mongoose.connect(`${uri}/${DB_NAME}`)
+      console.log(`MongoDB connected !! DB HOST: ${connectionInstance.connection.host}`);
+  } catch (error) {
+      console.log("MONGODB connection FAILED ", error);
+      process.exit(1)
   }
+}
 
   export default connectDB
