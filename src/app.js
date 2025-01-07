@@ -27,7 +27,7 @@ app.use(cookieParser())
 // import routes
 import routerUser from "./routes/users.routes.js"
 
-//declare routes
+//declare routes - app.get is not used here becoz no provision for router in that
 app.use("/api/users",routerUser)
 
 export {app}
