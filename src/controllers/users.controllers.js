@@ -88,4 +88,68 @@ const registerUser = asyncHandler(async(req,res) => {
    )
 });
 
-export {registerUser}
+const loginUser = asyncHandler(async(req,res) => {
+
+    const {username, password} = req.body
+
+    // validate username should not be blank in request
+    if(!username || !password)
+    {
+        throw new apiErrors(400,"Username and Password required")
+    }
+
+    //validate username exists in Db
+    const loggedUser = await User.findOne({username});
+
+    if(!loggedUser)
+    {
+        new apiErrors(400, "User not registered!")
+    }
+    
+    //validate password
+    const authenticatePassword = await loggedUser.isPasswordCorrect(password);
+    
+    if(!authenticatePassword)
+    {
+        throw new apiErrors(401,"Authentication Failed")
+    }
+    
+    // Generate token
+    const accessToken = await loggedUser.generateAccessToken();
+    const refreshToken = await loggedUser.generateRefreshToken();
+
+    //save refresh token in Db without validation
+    loggedUser.refreshToken = refreshToken
+    await loggedUser.save({ validateBeforeSave: false })
+    
+    // create cookie options so that they cannot be modified by client
+    const options = {
+        httpOnly: true,
+        secure: true
+    }
+
+    // return repsonse to user
+    const returnLoggedUser = await User.findById(loggedUser._id).select(
+        "-password"
+    )
+
+    res
+    .status(200)
+    .cookie("accessToken",accessToken,options)
+    .cookie("refreshToken",refreshToken,options)
+    .json(
+        new apiResponse(200, 
+            {returnLoggedUser,accessToken},
+        "User Log In Success"
+        )
+    )
+
+});
+
+const logoutUser = asyncHandler(async(req,res) => {
+
+    
+
+})
+
+export {registerUser, loginUser, logoutUser}
