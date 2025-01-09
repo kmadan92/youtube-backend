@@ -4,6 +4,33 @@ import {asyncHandler} from "../utils/asyncHandler.js"
 import { User } from "../models/youtube/users.models.js";
 import {uploadResult} from "../utils/fileUpload.js";
 
+/*
+Generate Access and Refresh Token
+and save refresh token to Db
+*/
+const generateAccessAndRefreshToken = async function(user)
+{
+    try{
+
+    const accessToken = await user.generateAccessToken();
+    const refreshToken = await user.generateRefreshToken();
+
+    //save refresh token in Db without validation
+    user.refreshToken = refreshToken
+    await user.save({ validateBeforeSave: false })
+
+    return {accessToken, refreshToken}
+
+    }catch(error)
+    {
+        throw new apiErrors(500,"Cannot Generate Access Or Refresh Token")
+    }
+}
+
+/*
+Validate user details
+save details in Db
+*/
 const registerUser = asyncHandler(async(req,res) => {
 
     //get user details
@@ -88,6 +115,12 @@ const registerUser = asyncHandler(async(req,res) => {
    )
 });
 
+/*
+Vaidate username password
+generate tokens
+set cookies and save refresh token in Db
+and save refresh token to Db
+*/
 const loginUser = asyncHandler(async(req,res) => {
 
     const {username, password} = req.body
@@ -114,13 +147,8 @@ const loginUser = asyncHandler(async(req,res) => {
         throw new apiErrors(401,"Authentication Failed")
     }
     
-    // Generate token
-    const accessToken = await loggedUser.generateAccessToken();
-    const refreshToken = await loggedUser.generateRefreshToken();
-
-    //save refresh token in Db without validation
-    loggedUser.refreshToken = refreshToken
-    await loggedUser.save({ validateBeforeSave: false })
+    // Generate token and save refresh token to Db
+    const {accessToken, refreshToken} = await generateAccessAndRefreshToken(loggedUser);
     
     // create cookie options so that they cannot be modified by client
     const options = {
@@ -146,9 +174,36 @@ const loginUser = asyncHandler(async(req,res) => {
 
 });
 
+/*
+Accept data from cookies/header
+decode token and set refresh token to null
+clear client cookies
+and save refresh token to Db
+*/
 const logoutUser = asyncHandler(async(req,res) => {
 
-    
+    const loggedOutUser = await User.findByIdAndUpdate(
+        req.user._id,
+        {refreshToken:null}, //setting refresh token to null
+        {new:true}) //return updated document
+
+    if(!loggedOutUser)
+    {
+        new apiErrors("500", "Token not deleted during logout process")
+    }
+
+    // set cookie option to be modified by only server
+    const options = {
+        httpOnly: true,
+        secure: true
+    }
+
+    // send response and clear cookies
+    res
+    .status(200)
+    .clearCookie("accessToken",options)
+    .clearCookie("refreshToken",options)
+    .json(200,{}, "User Logout Success!")
 
 })
 
