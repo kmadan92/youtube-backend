@@ -5,7 +5,6 @@ import {User} from "../models/youtube/users.models.js"
 
 const resetCookies = asyncHandler(async(req,res,next) => {
 
-    try {
         // get and validate token from request cookies or header
         const token = req.cookies?.accessToken || req.header("Authorization").replace("Bearer ", "")
     
@@ -26,10 +25,6 @@ const resetCookies = asyncHandler(async(req,res,next) => {
         
         // call next so that next function be called in routes
         next()
-    } catch (error) {
-        
-        new apiErrors("500", "Invalid Token Recieved")
-    }
 
 })
 

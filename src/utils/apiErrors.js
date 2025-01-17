@@ -5,6 +5,7 @@ class apiErrors extends Error{
         super(errorMessage)
         this.statusCode=statusCode
         this.data=null
+        this.message = errorMessage
         this.success=false
         this.errors = errors
 

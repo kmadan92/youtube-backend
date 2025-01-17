@@ -3,6 +3,10 @@ import { apiResponse } from "../utils/apiResponse.js";
 import {asyncHandler} from "../utils/asyncHandler.js"
 import { User } from "../models/youtube/users.models.js";
 import {uploadResult} from "../utils/fileUpload.js";
+import jwt from "jsonwebtoken";
+import dotenv from 'dotenv'
+
+dotenv.config({path:'./.env'})
 
 /*
 Generate Access and Refresh Token
@@ -161,7 +165,7 @@ const loginUser = asyncHandler(async(req,res) => {
         "-password"
     )
 
-    res
+    return res
     .status(200)
     .cookie("accessToken",accessToken,options)
     .cookie("refreshToken",refreshToken,options)
@@ -189,7 +193,7 @@ const logoutUser = asyncHandler(async(req,res) => {
 
     if(!loggedOutUser)
     {
-        new apiErrors("500", "Token not deleted during logout process")
+        throw new apiErrors("500", "Token not deleted during logout process")
     }
 
     // set cookie option to be modified by only server
@@ -199,12 +203,60 @@ const logoutUser = asyncHandler(async(req,res) => {
     }
 
     // send response and clear cookies
-    res
+    return res
     .status(200)
     .clearCookie("accessToken",options)
     .clearCookie("refreshToken",options)
-    .json(200,{}, "User Logout Success!")
+    .json(new apiResponse(200,{}, "User Logout Success!"))
 
 })
 
-export {registerUser, loginUser, logoutUser}
+const refreshAccessToken = asyncHandler(async(req,res) => {
+
+    const incomingRefreshToken = req.cookie?.refreshToken || req.body.refreshToken
+
+    if(!incomingRefreshToken)
+    {
+        throw new  apiErrors(500, "Refresh Token not recieved from client")
+    }
+
+        const decodedRefreshToken = await jwt.verify(incomingRefreshToken,process.env.REFRESH_TOKEN_SECRET)
+    
+        if(!incomingRefreshToken)
+            {
+                throw new apiErrors(500, "Refresh Token cannot be decoded")
+            }
+    
+        const tokenUser = await User.findById(decodedRefreshToken._id)
+    
+        if(!tokenUser)
+            {
+                throw new apiErrors(500, "Cannot get user details from decoded refresh token")
+            }
+            
+
+        if(incomingRefreshToken !== tokenUser?.refreshToken)
+            {
+                throw new apiErrors(500, "Incoming and Existing Token Mismatch")
+            }
+    
+        const {accessToken, refreshToken} = await generateAccessAndRefreshToken(tokenUser)
+    
+        const options = {
+            httpOnly: true,
+            secure: true
+        }
+    
+        return res.status(200)
+        .cookie("accessToken", accessToken, options)
+        .cookie("refreshToken", refreshToken, options)
+        .json(
+            new apiResponse(200,
+                {accessToken, refreshToken},
+             "AccessTokenRefreshed"
+        )
+        )
+
+})
+
+export {registerUser, loginUser, logoutUser, refreshAccessToken}
