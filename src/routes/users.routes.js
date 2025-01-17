@@ -1,5 +1,6 @@
 import { Router } from "express";
-import {registerUser, loginUser, logoutUser, refreshAccessToken} from "../controllers/users.controllers.js";
+import {registerUser, loginUser, logoutUser, refreshAccessToken, 
+    changePassword, updateUserDetails} from "../controllers/users.controllers.js";
 import { upload } from "../middleware/multer.middleware.js";
 import {resetCookies} from "../middleware/auth.middleware.js";
 
@@ -29,5 +30,11 @@ router.route("/logout").post(resetCookies,logoutUser)
 
 // route for refreshing access token
 router.route("/refreshAccessToken").post(refreshAccessToken)
+
+// route for updating password
+router.route("/changePassword").patch(resetCookies,changePassword)
+
+// route for updating user details
+router.route("/updateUserDetails").patch(resetCookies,updateUserDetails)
 
 export default router

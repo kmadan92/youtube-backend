@@ -161,9 +161,13 @@ const loginUser = asyncHandler(async(req,res) => {
     }
 
     // return repsonse to user
-    const returnLoggedUser = await User.findById(loggedUser._id).select(
+    const user = await User.findById(loggedUser._id).select(
         "-password"
     )
+
+    if(!user){
+        throw new apiErrors(500, "Something went wrong while login!")
+       }
 
     return res
     .status(200)
@@ -171,7 +175,7 @@ const loginUser = asyncHandler(async(req,res) => {
     .cookie("refreshToken",refreshToken,options)
     .json(
         new apiResponse(200, 
-            {returnLoggedUser,accessToken},
+            {user,accessToken},
         "User Log In Success"
         )
     )
@@ -259,4 +263,84 @@ const refreshAccessToken = asyncHandler(async(req,res) => {
 
 })
 
-export {registerUser, loginUser, logoutUser, refreshAccessToken}
+const changePassword = asyncHandler(async(req,res) => {
+
+    const {currentPassword, newPassword, confirmPassword} = req.body
+
+    if(!currentPassword || !newPassword || !confirmPassword)
+    {
+        throw new apiErrors(400, "Current, New and Confirmation Password Required")
+    }
+
+    if(newPassword !== confirmPassword)
+        {
+            throw new apiErrors(400, "New and Confirm Password do not match")
+        }
+
+    const user = await User.findById(req.user?._id)
+
+    if(!user)
+        {
+            throw new apiErrors(500, "User not found while changing password")
+        }
+
+    const validatePasswordCorrect = await user.isPasswordCorrect(currentPassword)
+
+    if(!validatePasswordCorrect)
+    {
+        throw new apiErrors(400, "Entered current password is wrong")
+    }
+
+    user.password = newPassword
+    await user.save()
+
+    const username = user.username
+
+    return res.status(201).json(
+
+        new apiResponse(201,{username},"Password Updated Successfully")
+    )
+})
+
+const updateUserDetails = asyncHandler(async(req,res) => {
+
+    let {fullName, email} = req.body
+
+    if(!fullName && !email)
+        {
+            throw new apiErrors(400, "Atleast Full name or email required")
+        }
+
+    let user = await User.findById(req.user?._id)
+    
+    if(!user)
+        {
+            throw new apiErrors(500, "User not found while updating user details")
+        }
+
+    if(fullName && email)
+    {
+        user.email = email
+        user.fullName = fullName
+    }
+    else if(!fullName)
+    {
+        user.email = email
+        fullName = user.fullName
+    }
+    else if(!email)
+    {
+        user.fullName = fullName
+        email = user.email
+    }
+    await user.save()
+
+    return res.status(201).json(
+
+        new apiResponse(201,{fullName, email},"Details Updated Successfully")
+    )
+
+    
+})
+
+export {registerUser, loginUser, logoutUser, refreshAccessToken, changePassword, updateUserDetails}
