@@ -1,6 +1,6 @@
 import { Router } from "express";
 import {registerUser, loginUser, logoutUser, refreshAccessToken, 
-    changePassword, updateUserDetails} from "../controllers/users.controllers.js";
+    changePassword, updateUserDetails, updateAvatar,getUser} from "../controllers/users.controllers.js";
 import { upload } from "../middleware/multer.middleware.js";
 import {resetCookies} from "../middleware/auth.middleware.js";
 
@@ -36,5 +36,14 @@ router.route("/changePassword").patch(resetCookies,changePassword)
 
 // route for updating user details
 router.route("/updateUserDetails").patch(resetCookies,updateUserDetails)
+
+// route for updating avatar
+router.route("/updateAvatar").patch(
+upload.single("avatar"),
+resetCookies,
+updateAvatar)
+
+//route for get user
+router.route("/getUser").get(resetCookies,getUser)
 
 export default router

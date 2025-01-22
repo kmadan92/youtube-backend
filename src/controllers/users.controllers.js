@@ -343,4 +343,65 @@ const updateUserDetails = asyncHandler(async(req,res) => {
     
 })
 
-export {registerUser, loginUser, logoutUser, refreshAccessToken, changePassword, updateUserDetails}
+const updateAvatar = asyncHandler(async(req,res) => {
+
+    const file = req.file
+
+    if(!file)
+    {
+        throw new apiErrors(400, "Avatar Image not found to update")
+    }
+
+    if(!req.file.path)
+    {
+        throw new apiErrors(500, "Path not found in avatar image to update")
+    }
+
+    const avatarLocalPath = req.file.path
+
+    const uploadAvatarOnCloudinary = await uploadResult(avatarLocalPath)
+
+    if(!uploadAvatarOnCloudinary.url)
+    {
+        throw new apiErrors(500, "Avatar not uploaded to cloudinary during updating avatar")
+    }
+
+    const user = await User.findByIdAndUpdate(
+        req.user?._id,
+        {
+            $set: {
+                avatar: uploadAvatarOnCloudinary.url
+            }
+        },
+        {new:true}
+    ).select("-password -refreshToken")
+
+    if(!user)
+    {
+        throw new apiErrors(500, "Error updating Avatar")
+    }
+
+    return res.status(201).json(
+
+        new apiResponse(201,{user},"Avatar Updated Successfully")
+    )
+
+})
+
+const getUser = asyncHandler(async(req,res) => {
+
+    const user = req.user
+
+    if(!user)   
+    {
+        throw new apiErrors(500, "User Not Found")
+    }
+
+    return res.status(200).json(
+
+        new apiResponse(200,{user},"User Fetched Successfully")
+    )
+
+})
+
+export {registerUser, loginUser, logoutUser, refreshAccessToken, changePassword, updateUserDetails, updateAvatar,getUser}
