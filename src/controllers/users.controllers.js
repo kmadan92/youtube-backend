@@ -47,7 +47,7 @@ const registerUser = asyncHandler(async(req,res) => {
    {
     throw new apiErrors(400,"Fields cannot be empty")
    }
-
+ 
    //validation for already esisting fields in Db
    const existedUser = await User.findOne(
     {
