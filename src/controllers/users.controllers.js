@@ -2,6 +2,7 @@ import { apiErrors } from "../utils/apiErrors.js";
 import { apiResponse } from "../utils/apiResponse.js";
 import {asyncHandler} from "../utils/asyncHandler.js"
 import { User } from "../models/youtube/users.models.js";
+import {Subscription} from "../models/youtube/subscription.models.js"
 import {uploadResult} from "../utils/fileUpload.js";
 import jwt from "jsonwebtoken";
 import dotenv from 'dotenv'
@@ -404,4 +405,80 @@ const getUser = asyncHandler(async(req,res) => {
 
 })
 
-export {registerUser, loginUser, logoutUser, refreshAccessToken, changePassword, updateUserDetails, updateAvatar,getUser}
+const getUserChannelProfile = asyncHandler(async(req,res) => {
+
+    const {username} = req.params
+
+    if(!username)
+    {
+        throw new apiErrors(400, "User Not Found")
+    }
+
+    const details = await User.aggregate(
+
+        [
+            {
+                $match: {
+                    username: username
+                }
+            },
+            {
+                $lookup: {
+                    from: "subscriptions",
+                    localField: "_id",
+                    foreignField: "channels",
+                    as: "subscribers"
+                }
+            },
+            {
+                $lookup: {
+                    from: "subscriptions",
+                    localField: "_id",
+                    foreignField: "subscribers",
+                    as: "subscribedTo"
+                }
+            },
+            {
+                $addFields:{
+                    subscriberCount: {
+                        $size: "$subscribers"
+                    },
+                    subscribedToCount: {
+                         $size: "$subscribedTo"
+                    },
+                    isSubscribed: {
+                        $cond: {
+                            if: {$in: [req.user?._id,"$subscribers.subscriber"]},
+                            then: true,
+                            else: false
+                        }
+                    }
+                }
+                
+            },
+            {
+                $project: {
+                    username:1,
+                    fullName:1,
+                    subscriberCount:1,
+                    subscribedToCount:1,
+                    avatar:1,
+                    coverImage:1
+                }
+            }
+        ]
+    )
+
+    if(!details?.length)
+    {
+        throw new apiErrors(500, "Something went wrong while fetching channel details.")
+    }
+
+    return res.status(200).json(
+
+        new apiResponse(200,details[0],"Channel Fetched Successfully")
+    )
+
+})
+
+export {registerUser, loginUser, logoutUser, refreshAccessToken, changePassword, updateUserDetails, updateAvatar,getUser, getUserChannelProfile}
