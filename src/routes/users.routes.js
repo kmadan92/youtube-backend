@@ -1,6 +1,7 @@
 import { Router } from "express";
 import {registerUser, loginUser, logoutUser, refreshAccessToken, 
-    changePassword, updateUserDetails, updateAvatar,getUser, getUserChannelProfile} from "../controllers/users.controllers.js";
+    changePassword, updateUserDetails, updateAvatar,getUser, getUserChannelProfile,
+    getUserWatchHistory} from "../controllers/users.controllers.js";
 import { upload } from "../middleware/multer.middleware.js";
 import {resetCookies} from "../middleware/auth.middleware.js";
 
@@ -46,7 +47,10 @@ updateAvatar)
 //route for get user
 router.route("/getUser").get(resetCookies,getUser)
 
-//router to get user channel details - :username is route parameter
+//route to get user channel details - :username is route parameter
 router.route("/channel/:username").get(resetCookies,getUserChannelProfile)
+
+//route to get user watch history
+router.route("/getUserWatchHistory").get(resetCookies,getUserWatchHistory)
 
 export default router

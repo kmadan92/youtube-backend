@@ -5,7 +5,8 @@ import { User } from "../models/youtube/users.models.js";
 import {Subscription} from "../models/youtube/subscription.models.js"
 import {uploadResult} from "../utils/fileUpload.js";
 import jwt from "jsonwebtoken";
-import dotenv from 'dotenv'
+import dotenv from 'dotenv';
+import mongoose, {Schema} from "mongoose";
 
 dotenv.config({path:'./.env'})
 
@@ -481,4 +482,59 @@ const getUserChannelProfile = asyncHandler(async(req,res) => {
 
 })
 
-export {registerUser, loginUser, logoutUser, refreshAccessToken, changePassword, updateUserDetails, updateAvatar,getUser, getUserChannelProfile}
+const getUserWatchHistory = asyncHandler(async(req,res) => {
+
+    const history = await User.aggregate([
+
+        {
+            $match: {
+                _id: req.user._id
+            }
+        },
+        {
+            $lookup: {
+                from: "videos",
+                localField: "watchHistory",
+                foreignField: "_id",
+                as: "videoDetails",
+                pipeline :[
+                    {
+                        $lookup: {
+                        from: "users",
+                        localField: "owner",
+                        foreignField: "_id",
+                        as: "videoOwnerDetails",
+                        pipeline: [
+                            {
+                                $project:{
+                                    fullName:1,
+                                    username:1,
+                                    avatar:1
+                                }
+                            }
+                        ]
+                        }
+                    },
+                    {
+                        $addFields:{
+                            owner:{
+                                $first: "$owner"
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    ])
+
+    return res
+    .status(200)
+    .json(
+        new apiResponse(
+            200,
+            history[0].videoDetails,
+            "Watch history fetched successfully"))
+
+})
+
+export {registerUser, loginUser, logoutUser, refreshAccessToken, changePassword, updateUserDetails, updateAvatar,getUser, getUserChannelProfile, getUserWatchHistory}
