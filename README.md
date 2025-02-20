@@ -49,7 +49,7 @@ CLOUDINARY_API_SECRET=
 
 ## Usage
 
-- Use tools like **Postman** to test API endpoints.
+- Use tools like **Postman** or **Bruno** to test API endpoints - [API Collection JSON File](https://github.com/kmadan92/youtube-backend/blob/main/explore-backend-bruno-collection.json)
 - Ensure **MongoDB** is running locally or use a cloud-hosted solution.
 - Securely manage sensitive data using environment variables.
 
