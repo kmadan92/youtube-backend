@@ -49,7 +49,7 @@ const toggleSubscription = asyncHandler(async (req, res) => {
         toggle = false
     }
     else{
-        console.log(req.user._id)
+        
         const addSubscription = await Subscription.insertOne({ 
 
             subscriber: user,
