@@ -75,6 +75,42 @@ const toggleSubscription = asyncHandler(async (req, res) => {
 
 const getUserChannelSubscribers = asyncHandler(async (req, res) => {
 
+    const {channel} = req.params
+
+    //check if channel exists
+    const userChannel = await User.findOne({
+        username: channel
+    })
+    
+    if(!userChannel){
+        throw new apiErrors(400, "Channel does not ecists")
+    }
+
+    const ChannelSubscriberAP = await Subscription.aggregate([
+        {
+            $match: {
+                channel: userChannel?._id
+            }
+        },
+        {
+             $count: "TotalSubscriber"
+        }
+    ]);
+
+    let ChannelSubscriber = undefined
+
+    if(ChannelSubscriberAP.length ===0){
+        ChannelSubscriber = {TotalSubscriber:0}
+    }
+    else{
+        ChannelSubscriber = ChannelSubscriberAP.at(0)
+    }
+
+    return res.status(201).json(
+
+        new apiResponse(201,{channel, ChannelSubscriber},"Get Channel Subscriber Successfull")
+    )
+
 })
 
 const getSubscribedChannels = asyncHandler(async (req, res) => {
