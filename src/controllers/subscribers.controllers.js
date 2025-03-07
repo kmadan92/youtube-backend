@@ -115,6 +115,34 @@ const getUserChannelSubscribers = asyncHandler(async (req, res) => {
 
 const getSubscribedChannels = asyncHandler(async (req, res) => {
 
+    const user = req.user?._id
+    const username = req.user?._username
+
+    const subscribedChannels = await Subscription.aggregate([
+
+        {
+            $match:{
+                subscriber:user
+            }
+        },
+        {
+            $count: "SubscribedChannels"
+        }
+    ])
+
+    let Subscribed = undefined
+
+    if(subscribedChannels.length ===0){
+        Subscribed = {SubscribedChannels:0}
+    }
+    else{
+        Subscribed = subscribedChannels.at(0)
+    }
+
+    return res.status(201).json(
+
+        new apiResponse(201,{username, Subscribed},"Get Channel Subscribed By User Successful")
+    )
 })
 
 export { toggleSubscription, getUserChannelSubscribers, getSubscribedChannels }

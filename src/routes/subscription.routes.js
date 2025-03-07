@@ -10,4 +10,7 @@ router.route("/toggleSubscription/:channel").post(resetCookies,toggleSubscriptio
 // route to get Channel subscribers
 router.route("/getUserChannelSubscribers/:channel").get(resetCookies,getUserChannelSubscribers)
 
+//route to get subscribed channel by user
+router.route("/getSubscribedChannels").get(resetCookies,getSubscribedChannels)
+
 export default router
