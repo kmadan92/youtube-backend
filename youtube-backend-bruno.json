@@ -1,0 +1,576 @@
+{
+  "name": "youtube-backend-bruno",
+  "version": "1",
+  "items": [
+    {
+      "type": "folder",
+      "name": "User",
+      "items": [
+        {
+          "type": "http",
+          "name": "ChangePassword",
+          "seq": 5,
+          "request": {
+            "url": "{{server}}/api/users/changePassword",
+            "method": "PATCH",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzhhMzM2NDhhOTZjNDJmY2UyYzViNzgiLCJlbWFpbCI6InVzaGFrYXBvb3JAZ21haWwuY29tIiwidXNlcm5hbWUiOiJ1c2hhIiwiZnVsbE5hbWUiOiJVc2hhIiwiaWF0IjoxNzM3MTEwMzg4LCJleHAiOjE3MzcxOTY3ODh9.Qv3DtEXUeW3p2dhK3aoJdo8wazib1XsONyed3byBbbo",
+                "enabled": true
+              }
+            ],
+            "params": [],
+            "body": {
+              "mode": "formUrlEncoded",
+              "formUrlEncoded": [
+                {
+                  "name": "currentPassword",
+                  "value": "kapil123",
+                  "enabled": true
+                },
+                {
+                  "name": "newPassword",
+                  "value": "kapil12",
+                  "enabled": true
+                },
+                {
+                  "name": "confirmPassword",
+                  "value": "kapil12",
+                  "enabled": true
+                }
+              ],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "GetUser",
+          "seq": 8,
+          "request": {
+            "url": "{{server}}/api/users/getUser",
+            "method": "GET",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzhhNDRlMzE1ZGQ0YzgwOGQ1Y2I4MTIiLCJlbWFpbCI6Im1hZGFuQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoicmFqIiwiZnVsbE5hbWUiOiJSSyBNYWRhbiIsImlhdCI6MTczNzUzOTk0NywiZXhwIjoxNzM3NjI2MzQ3fQ.7z_pL0duflg4U3RDcoWRiXzaWltQ1nHexiWKxh7bGoY",
+                "enabled": true
+              }
+            ],
+            "params": [],
+            "body": {
+              "mode": "formUrlEncoded",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "GetUserChannelDetails",
+          "seq": 9,
+          "request": {
+            "url": "{{server}}/api/users/channel/kmadan92",
+            "method": "GET",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzhhNDRlMzE1ZGQ0YzgwOGQ1Y2I4MTIiLCJlbWFpbCI6Im1hZGFuQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoicmFqIiwiZnVsbE5hbWUiOiJSSyBNYWRhbiIsImlhdCI6MTczNzUzOTk0NywiZXhwIjoxNzM3NjI2MzQ3fQ.7z_pL0duflg4U3RDcoWRiXzaWltQ1nHexiWKxh7bGoY",
+                "enabled": true
+              }
+            ],
+            "params": [],
+            "body": {
+              "mode": "formUrlEncoded",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "GetUserWatchHistory",
+          "seq": 10,
+          "request": {
+            "url": "{{server}}/api/getUserWatchHistory",
+            "method": "GET",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzhhMzM2NDhhOTZjNDJmY2UyYzViNzgiLCJlbWFpbCI6InVzaGFrQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoidXNoYSIsImZ1bGxOYW1lIjoidXNoYSIsImlhdCI6MTc0MDA0OTMwNSwiZXhwIjoxNzQwMTM1NzA1fQ.O5-Xk1wIR9nvvlBEiDEauG9rwYBTLf3tY1clzDzVk8s",
+                "enabled": true
+              }
+            ],
+            "params": [],
+            "body": {
+              "mode": "formUrlEncoded",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "LoginUser",
+          "seq": 2,
+          "request": {
+            "url": "{{server}}/api/users/login",
+            "method": "POST",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "formUrlEncoded",
+              "json": "{\n  \"username\":\"nahakap\",\n  \"password\":\"kap123\"\n}",
+              "formUrlEncoded": [
+                {
+                  "name": "username",
+                  "value": "usha",
+                  "enabled": true
+                },
+                {
+                  "name": "password",
+                  "value": "kapil12",
+                  "enabled": true
+                }
+              ],
+              "multipartForm": [
+                {
+                  "type": "text",
+                  "name": "username",
+                  "value": "nehakap",
+                  "enabled": true
+                },
+                {
+                  "type": "text",
+                  "name": "password",
+                  "value": "kapil123",
+                  "enabled": true
+                }
+              ]
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "LogoutUser",
+          "seq": 3,
+          "request": {
+            "url": "{{server}}/api/users/logout",
+            "method": "POST",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzhhMzM2NDhhOTZjNDJmY2UyYzViNzgiLCJlbWFpbCI6InVzaGFrYXBvb3JAZ21haWwuY29tIiwidXNlcm5hbWUiOiJ1c2hhIiwiZnVsbE5hbWUiOiJVc2hhIiwiaWF0IjoxNzM3MTEwMzg4LCJleHAiOjE3MzcxOTY3ODh9.Qv3DtEXUeW3p2dhK3aoJdo8wazib1XsONyed3byBbbo",
+                "enabled": true
+              }
+            ],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "RefreshAccessToken",
+          "seq": 4,
+          "request": {
+            "url": "{{server}}/api/users/refreshAccessToken",
+            "method": "POST",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "formUrlEncoded",
+              "formUrlEncoded": [
+                {
+                  "name": "refreshToken",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzhhMzM2NDhhOTZjNDJmY2UyYzViNzgiLCJpYXQiOjE3MzcxMTA1NTYsImV4cCI6MTczNzk3NDU1Nn0.3bPAgvbsgJeeFev2k5WVYkv6Dj5cV4BbJUSWBnbzPds",
+                  "enabled": true
+                }
+              ],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "UpdateAvatar",
+          "seq": 6,
+          "request": {
+            "url": "{{server}}/api/users/updateUserDetails",
+            "method": "PATCH",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzhhNDRlMzE1ZGQ0YzgwOGQ1Y2I4MTIiLCJlbWFpbCI6InJhamt1bWFyQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoicmFqIiwiZnVsbE5hbWUiOiJyYWoiLCJpYXQiOjE3MzcxMTcxMzcsImV4cCI6MTczNzIwMzUzN30.pWy3iLID2hQonGlqcH3NiNF1TS30Ufv0LnwfM9bVmSM",
+                "enabled": true
+              }
+            ],
+            "params": [],
+            "body": {
+              "mode": "formUrlEncoded",
+              "formUrlEncoded": [
+                {
+                  "name": "fullName",
+                  "value": "RK Madan",
+                  "enabled": true
+                },
+                {
+                  "name": "email",
+                  "value": "",
+                  "enabled": true
+                }
+              ],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "UpdateUserDetails",
+          "seq": 7,
+          "request": {
+            "url": "{{server}}/api/users/updateUserDetails",
+            "method": "PATCH",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzhhNDRlMzE1ZGQ0YzgwOGQ1Y2I4MTIiLCJlbWFpbCI6InJhamt1bWFyQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoicmFqIiwiZnVsbE5hbWUiOiJyYWoiLCJpYXQiOjE3MzcxMTcxMzcsImV4cCI6MTczNzIwMzUzN30.pWy3iLID2hQonGlqcH3NiNF1TS30Ufv0LnwfM9bVmSM",
+                "enabled": true
+              }
+            ],
+            "params": [],
+            "body": {
+              "mode": "formUrlEncoded",
+              "formUrlEncoded": [
+                {
+                  "name": "fullName",
+                  "value": "RK Madan",
+                  "enabled": true
+                },
+                {
+                  "name": "email",
+                  "value": "",
+                  "enabled": true
+                }
+              ],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "UserRegistration",
+          "seq": 1,
+          "request": {
+            "url": "http://localhost:8000/api/users/register",
+            "method": "POST",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "multipartForm",
+              "formUrlEncoded": [],
+              "multipartForm": [
+                {
+                  "type": "text",
+                  "name": "fullName",
+                  "value": "Usha",
+                  "enabled": true
+                },
+                {
+                  "type": "text",
+                  "name": "email",
+                  "value": "ushakapoor@gmail.com",
+                  "enabled": true
+                },
+                {
+                  "type": "text",
+                  "name": "password",
+                  "value": "kapil123",
+                  "enabled": true
+                },
+                {
+                  "type": "text",
+                  "name": "username",
+                  "value": "usha",
+                  "enabled": true
+                },
+                {
+                  "type": "file",
+                  "name": "avatar",
+                  "value": [
+                    "C:\\Users\\kapilmadan\\Desktop\\avatar.png"
+                  ],
+                  "enabled": true
+                }
+              ]
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "Subscription",
+      "items": [
+        {
+          "type": "http",
+          "name": "getSubscribedChannelsCount",
+          "seq": 3,
+          "request": {
+            "url": "{{server}}/api/subscription/getSubscribedChannelsCount",
+            "method": "GET",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2M5NzRiODMxMDA1MjNiMWVmYWU3NTYiLCJlbWFpbCI6ImFiY0BnbWFpbC5jb20iLCJ1c2VybmFtZSI6ImFiYyIsImZ1bGxOYW1lIjoiYWJjZCIsImlhdCI6MTc0MTI1NTkwNSwiZXhwIjoxNzQxMzQyMzA1fQ.7dSAML_nb73Ji25m1z0dlKFlp5zyaKiSrUv5zy2sbQQ",
+                "enabled": true
+              }
+            ],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "getUserChannelSubscribersCount",
+          "seq": 2,
+          "request": {
+            "url": "{{server}}/api/subscription/getUserChannelSubscribersCount/xyz",
+            "method": "GET",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2M5NzRiODMxMDA1MjNiMWVmYWU3NTYiLCJlbWFpbCI6ImFiY0BnbWFpbC5jb20iLCJ1c2VybmFtZSI6ImFiYyIsImZ1bGxOYW1lIjoiYWJjZCIsImlhdCI6MTc0MTI1NTkwNSwiZXhwIjoxNzQxMzQyMzA1fQ.7dSAML_nb73Ji25m1z0dlKFlp5zyaKiSrUv5zy2sbQQ",
+                "enabled": true
+              }
+            ],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "getUserChannelSubscribersList",
+          "seq": 4,
+          "request": {
+            "url": "{{server}}/api/subscription/getUserChannelSubscribersList/poonam",
+            "method": "GET",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2Q3YTMyY2Q5NGNlNDdkOTBiY2ZkNjQiLCJlbWFpbCI6InJhakBnbWFpbC5jb20iLCJ1c2VybmFtZSI6InJhaiIsImZ1bGxOYW1lIjoicmFqIiwiaWF0IjoxNzQyMTg1NTczLCJleHAiOjE3NDIyNzE5NzN9.rlfImuyKZrYUQ0y2PSZR5m-nOmPBJP7ZwwNPTHgBsRQ",
+                "enabled": true
+              }
+            ],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "toggleSubscription",
+          "seq": 1,
+          "request": {
+            "url": "{{server}}/api/subscription/toggleSubscription/xyz",
+            "method": "POST",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2M5NzRiODMxMDA1MjNiMWVmYWU3NTYiLCJlbWFpbCI6ImFiY0BnbWFpbC5jb20iLCJ1c2VybmFtZSI6ImFiYyIsImZ1bGxOYW1lIjoiYWJjZCIsImlhdCI6MTc0MTI1NTkwNSwiZXhwIjoxNzQxMzQyMzA1fQ.7dSAML_nb73Ji25m1z0dlKFlp5zyaKiSrUv5zy2sbQQ",
+                "enabled": true
+              }
+            ],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "getSubscribedChannelsList",
+          "seq": 5,
+          "request": {
+            "url": "{{server}}/api/subscription/getSubscribedChannelsList",
+            "method": "GET",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2Q3YTMyY2Q5NGNlNDdkOTBiY2ZkNjQiLCJlbWFpbCI6InJhakBnbWFpbC5jb20iLCJ1c2VybmFtZSI6InJhaiIsImZ1bGxOYW1lIjoicmFqIiwiaWF0IjoxNzQyMTg1NTczLCJleHAiOjE3NDIyNzE5NzN9.rlfImuyKZrYUQ0y2PSZR5m-nOmPBJP7ZwwNPTHgBsRQ",
+                "enabled": true
+              }
+            ],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "activeEnvironmentUid": "36VNzBS1wphXtvw47Ujzj",
+  "environments": [
+    {
+      "variables": [
+        {
+          "name": "server",
+          "value": "http://localhost:8000",
+          "enabled": true,
+          "secret": false,
+          "type": "text"
+        }
+      ],
+      "name": "localhost"
+    }
+  ],
+  "brunoConfig": {
+    "version": "1",
+    "name": "youtube-backend-bruno",
+    "type": "collection",
+    "ignore": [
+      "node_modules",
+      ".git"
+    ]
+  }
+}

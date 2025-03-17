@@ -73,7 +73,7 @@ const toggleSubscription = asyncHandler(async (req, res) => {
     )
 })
 
-const getUserChannelSubscribers = asyncHandler(async (req, res) => {
+const getUserChannelSubscribersCount = asyncHandler(async (req, res) => {
 
     const {channel} = req.params
 
@@ -108,12 +108,12 @@ const getUserChannelSubscribers = asyncHandler(async (req, res) => {
 
     return res.status(201).json(
 
-        new apiResponse(201,{channel, ChannelSubscriber},"Get Channel Subscriber Successfull")
+        new apiResponse(201,{channel, ChannelSubscriber},"Get Channel Subscriber Count Successfull")
     )
 
 })
 
-const getSubscribedChannels = asyncHandler(async (req, res) => {
+const getSubscribedChannelsCount = asyncHandler(async (req, res) => {
 
     const user = req.user?._id
     const username = req.user?._username
@@ -141,8 +141,109 @@ const getSubscribedChannels = asyncHandler(async (req, res) => {
 
     return res.status(201).json(
 
-        new apiResponse(201,{username, Subscribed},"Get Channel Subscribed By User Successful")
+        new apiResponse(201,{username, Subscribed},"Get Channel Subscribed By User Clount Successful")
     )
 })
 
-export { toggleSubscription, getUserChannelSubscribers, getSubscribedChannels }
+const getSubscribedChannelsList = asyncHandler(async (req, res) => {
+
+    const user = req.user?._id
+    const username = req.user?._username
+
+    const subscribedChannels = await Subscription.aggregate([
+
+        {
+            $match:{
+                subscriber:user
+            }
+        },
+        {
+            $lookup:
+            {
+                from: "users",
+                localField: "channel",
+                foreignField: "_id",
+                as: "subscriber_lookup"
+            }
+        },
+        {
+            $project:{
+                    Channels:{
+                    $arrayElemAt:["$subscriber_lookup.username",0]
+                  },
+                    _id:0
+            }
+        }
+    ])
+
+    let Subscribed = undefined
+
+    if(subscribedChannels.length ===0){
+        Subscribed = {Channels:{}}
+    }
+    else{
+        Subscribed = subscribedChannels.at(0)
+    }
+
+    return res.status(201).json(
+
+        new apiResponse(201,{username, Subscribed},"Get Subscribed Channel List Success")
+    )
+})
+
+const getUserChannelSubscribersList = asyncHandler(async (req, res) => {
+
+    const {channel} = req.params
+
+    //check if channel exists
+    const userChannel = await User.findOne({
+        username: channel
+    })
+    
+    if(!userChannel){
+        throw new apiErrors(400, "Channel does not ecists")
+    }
+
+    const ChannelSubscriberAP = await Subscription.aggregate([
+        {
+            $match: {
+                channel: userChannel?._id
+            }
+        },
+        {
+             $lookup:
+                {
+                    from: "users",
+                    localField: "subscriber",
+                    foreignField: "_id",
+                    as: "subscriberList"
+                  }
+        },
+        {
+            $project:{
+                "Subscribers":{
+                    $arrayElemAt:["$subscriberList.username",0]
+                  },
+                  "_id":0
+            }
+        }
+    ]);
+
+    let ChannelSubscriber = undefined 
+
+    if(ChannelSubscriberAP.length ===0){
+        ChannelSubscriber = {Subscribers:{}}
+    }
+    else{
+        console.log(ChannelSubscriberAP.forEach((x)=>x.Subscribers))
+        ChannelSubscriber = ChannelSubscriberAP
+    }
+    console.log(ChannelSubscriber)
+    return res.status(201).json(
+
+        new apiResponse(201,{channel, ChannelSubscriber},"Get Channel Subscriber List Successfull")
+    )
+
+})
+
+export { toggleSubscription, getUserChannelSubscribersCount, getSubscribedChannelsCount, getUserChannelSubscribersList, getSubscribedChannelsList }
