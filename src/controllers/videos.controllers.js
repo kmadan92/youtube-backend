@@ -18,7 +18,7 @@ const getAllVideosByUser = asyncHandler(async (req, res) => {
 
 })
 
-const getAllVideosById = asyncHandler(async (req, res) => {
+const getVideosById = asyncHandler(async (req, res) => {
 
 })
 
@@ -29,3 +29,5 @@ const watchVideo = asyncHandler(async (req, res) => {
 const togglePublishStatus = asyncHandler(async (req, res) => {
 
 })
+
+export {uploadVideo, deleteVideo, getAllVideosByUser, getVideosById, watchVideo, togglePublishStatus}

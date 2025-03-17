@@ -16,7 +16,7 @@
             "headers": [
               {
                 "name": "Authorization",
-                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzhhMzM2NDhhOTZjNDJmY2UyYzViNzgiLCJlbWFpbCI6InVzaGFrYXBvb3JAZ21haWwuY29tIiwidXNlcm5hbWUiOiJ1c2hhIiwiZnVsbE5hbWUiOiJVc2hhIiwiaWF0IjoxNzM3MTEwMzg4LCJleHAiOjE3MzcxOTY3ODh9.Qv3DtEXUeW3p2dhK3aoJdo8wazib1XsONyed3byBbbo",
+                "value": "Bearer <Token>",
                 "enabled": true
               }
             ],
@@ -62,7 +62,7 @@
             "headers": [
               {
                 "name": "Authorization",
-                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzhhNDRlMzE1ZGQ0YzgwOGQ1Y2I4MTIiLCJlbWFpbCI6Im1hZGFuQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoicmFqIiwiZnVsbE5hbWUiOiJSSyBNYWRhbiIsImlhdCI6MTczNzUzOTk0NywiZXhwIjoxNzM3NjI2MzQ3fQ.7z_pL0duflg4U3RDcoWRiXzaWltQ1nHexiWKxh7bGoY",
+                "value": "Bearer <Token>",
                 "enabled": true
               }
             ],
@@ -92,7 +92,7 @@
             "headers": [
               {
                 "name": "Authorization",
-                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzhhNDRlMzE1ZGQ0YzgwOGQ1Y2I4MTIiLCJlbWFpbCI6Im1hZGFuQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoicmFqIiwiZnVsbE5hbWUiOiJSSyBNYWRhbiIsImlhdCI6MTczNzUzOTk0NywiZXhwIjoxNzM3NjI2MzQ3fQ.7z_pL0duflg4U3RDcoWRiXzaWltQ1nHexiWKxh7bGoY",
+                "value": "Bearer <Token>",
                 "enabled": true
               }
             ],
@@ -122,7 +122,7 @@
             "headers": [
               {
                 "name": "Authorization",
-                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzhhMzM2NDhhOTZjNDJmY2UyYzViNzgiLCJlbWFpbCI6InVzaGFrQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoidXNoYSIsImZ1bGxOYW1lIjoidXNoYSIsImlhdCI6MTc0MDA0OTMwNSwiZXhwIjoxNzQwMTM1NzA1fQ.O5-Xk1wIR9nvvlBEiDEauG9rwYBTLf3tY1clzDzVk8s",
+                "value": "Bearer <Token>",
                 "enabled": true
               }
             ],
@@ -201,7 +201,7 @@
             "headers": [
               {
                 "name": "Authorization",
-                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzhhMzM2NDhhOTZjNDJmY2UyYzViNzgiLCJlbWFpbCI6InVzaGFrYXBvb3JAZ21haWwuY29tIiwidXNlcm5hbWUiOiJ1c2hhIiwiZnVsbE5hbWUiOiJVc2hhIiwiaWF0IjoxNzM3MTEwMzg4LCJleHAiOjE3MzcxOTY3ODh9.Qv3DtEXUeW3p2dhK3aoJdo8wazib1XsONyed3byBbbo",
+                "value": "Bearer <Token>",
                 "enabled": true
               }
             ],
@@ -235,7 +235,7 @@
               "formUrlEncoded": [
                 {
                   "name": "refreshToken",
-                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzhhMzM2NDhhOTZjNDJmY2UyYzViNzgiLCJpYXQiOjE3MzcxMTA1NTYsImV4cCI6MTczNzk3NDU1Nn0.3bPAgvbsgJeeFev2k5WVYkv6Dj5cV4BbJUSWBnbzPds",
+                  "value": "<Refresh Token>",
                   "enabled": true
                 }
               ],
@@ -261,7 +261,7 @@
             "headers": [
               {
                 "name": "Authorization",
-                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzhhNDRlMzE1ZGQ0YzgwOGQ1Y2I4MTIiLCJlbWFpbCI6InJhamt1bWFyQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoicmFqIiwiZnVsbE5hbWUiOiJyYWoiLCJpYXQiOjE3MzcxMTcxMzcsImV4cCI6MTczNzIwMzUzN30.pWy3iLID2hQonGlqcH3NiNF1TS30Ufv0LnwfM9bVmSM",
+                "value": "Bearer <Token>",
                 "enabled": true
               }
             ],
@@ -302,7 +302,7 @@
             "headers": [
               {
                 "name": "Authorization",
-                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzhhNDRlMzE1ZGQ0YzgwOGQ1Y2I4MTIiLCJlbWFpbCI6InJhamt1bWFyQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoicmFqIiwiZnVsbE5hbWUiOiJyYWoiLCJpYXQiOjE3MzcxMTcxMzcsImV4cCI6MTczNzIwMzUzN30.pWy3iLID2hQonGlqcH3NiNF1TS30Ufv0LnwfM9bVmSM",
+                "value": "Bearer <Token>",
                 "enabled": true
               }
             ],
@@ -406,7 +406,7 @@
             "headers": [
               {
                 "name": "Authorization",
-                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2M5NzRiODMxMDA1MjNiMWVmYWU3NTYiLCJlbWFpbCI6ImFiY0BnbWFpbC5jb20iLCJ1c2VybmFtZSI6ImFiYyIsImZ1bGxOYW1lIjoiYWJjZCIsImlhdCI6MTc0MTI1NTkwNSwiZXhwIjoxNzQxMzQyMzA1fQ.7dSAML_nb73Ji25m1z0dlKFlp5zyaKiSrUv5zy2sbQQ",
+                "value": "Bearer <Token>",
                 "enabled": true
               }
             ],
@@ -436,7 +436,7 @@
             "headers": [
               {
                 "name": "Authorization",
-                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2M5NzRiODMxMDA1MjNiMWVmYWU3NTYiLCJlbWFpbCI6ImFiY0BnbWFpbC5jb20iLCJ1c2VybmFtZSI6ImFiYyIsImZ1bGxOYW1lIjoiYWJjZCIsImlhdCI6MTc0MTI1NTkwNSwiZXhwIjoxNzQxMzQyMzA1fQ.7dSAML_nb73Ji25m1z0dlKFlp5zyaKiSrUv5zy2sbQQ",
+                "value": "Bearer <Token>",
                 "enabled": true
               }
             ],
@@ -466,7 +466,7 @@
             "headers": [
               {
                 "name": "Authorization",
-                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2Q3YTMyY2Q5NGNlNDdkOTBiY2ZkNjQiLCJlbWFpbCI6InJhakBnbWFpbC5jb20iLCJ1c2VybmFtZSI6InJhaiIsImZ1bGxOYW1lIjoicmFqIiwiaWF0IjoxNzQyMTg1NTczLCJleHAiOjE3NDIyNzE5NzN9.rlfImuyKZrYUQ0y2PSZR5m-nOmPBJP7ZwwNPTHgBsRQ",
+                "value": "Bearer <Token>",
                 "enabled": true
               }
             ],
@@ -496,7 +496,7 @@
             "headers": [
               {
                 "name": "Authorization",
-                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2M5NzRiODMxMDA1MjNiMWVmYWU3NTYiLCJlbWFpbCI6ImFiY0BnbWFpbC5jb20iLCJ1c2VybmFtZSI6ImFiYyIsImZ1bGxOYW1lIjoiYWJjZCIsImlhdCI6MTc0MTI1NTkwNSwiZXhwIjoxNzQxMzQyMzA1fQ.7dSAML_nb73Ji25m1z0dlKFlp5zyaKiSrUv5zy2sbQQ",
+                "value": "Bearer <Token>",
                 "enabled": true
               }
             ],
@@ -526,7 +526,7 @@
             "headers": [
               {
                 "name": "Authorization",
-                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2Q3YTMyY2Q5NGNlNDdkOTBiY2ZkNjQiLCJlbWFpbCI6InJhakBnbWFpbC5jb20iLCJ1c2VybmFtZSI6InJhaiIsImZ1bGxOYW1lIjoicmFqIiwiaWF0IjoxNzQyMTg1NTczLCJleHAiOjE3NDIyNzE5NzN9.rlfImuyKZrYUQ0y2PSZR5m-nOmPBJP7ZwwNPTHgBsRQ",
+                "value": "Bearer <Token>",
                 "enabled": true
               }
             ],
